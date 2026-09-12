@@ -41,3 +41,6 @@ Dos archivos por cada pieza de contenido:
 - Orquestador que combine las salidas de los 6 skills de análisis en un veredicto único
 - Ejecución de órdenes: fuera de alcance — este pipeline es de análisis y contenido, no de
   trading automático con dinero real
+- **Agente iniciador/cron**: dispara el proceso completo solo, sin presencia del usuario,
+  cada cierto tiempo. Se agrega recién cuando el video de ejemplo salga como se espera y el
+  resto de los agentes funcionen bien en la marcha blanca — no antes.
