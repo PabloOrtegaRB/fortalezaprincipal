@@ -35,12 +35,26 @@ Dos archivos por cada pieza de contenido:
 - `reel_short.mp4` — short/reel, 9:16, <60s, subtitulado, recortado del mismo material con
   `social-media-clip-creator`
 
+## Equipo de trading (`.claude/agents/trading/`) — solo análisis y alertas
+
+| Rol pedido por el usuario | Cómo quedó cubierto |
+|---|---|
+| RSI + avisar en divergencia | `skill-03-rsi` + `skill-06-divergence` (ya existían, plugin `anthropic-skills`) |
+| Cruce EMA 10/20/50/200 (long/short bias) | **`ema-trend-analyst`** (nuevo, este repo) |
+| Volumen | `skill-05-volume` (ya existía) |
+| Control de entradas / gestión de riesgo | `skill-08-risk` (ya existía, tiene poder de veto) |
+| Métricas de todo el listado de futuros USDT | **`usdt-futures-screener`** (nuevo, este repo) |
+| Generar la entrada (veredicto compuesto) | **`signal-orchestrator`** (nuevo, este repo) — combina todo, nunca ejecuta |
+| Auditor de sesgos | `skill-11-market-psychology` (ya existía) |
+| Vigilar la posición cada cierto tiempo | **`position-watch`** (nuevo, este repo) — solo alerta, nunca cierra la posición |
+| Ejecutar la entrada | **No existe y no se va a construir** — colocar órdenes reales queda fuera de mis límites sin importar el contexto o la autorización dada |
+| Salida automática / auto take-profit | **No existe** — `position-watch` es el sustituto: avisa, nunca cierra la posición solo |
+
 ## Pendiente / no incluido todavía
 
-- Screener de todos los pares USDT-M de Binance Futuros (no construido aún)
-- Orquestador que combine las salidas de los 6 skills de análisis en un veredicto único
-- Ejecución de órdenes: fuera de alcance — este pipeline es de análisis y contenido, no de
-  trading automático con dinero real
+- Video real de ejemplo: bloqueado por falta de créditos de Higgsfield (10 disponibles,
+  se necesitan 65 para un clip de prueba de 10s) — pendiente de que el usuario recargue
+  créditos o autorice un modelo/duración más barata.
 - **Agente iniciador/cron**: dispara el proceso completo solo, sin presencia del usuario,
   cada cierto tiempo. Se agrega recién cuando el video de ejemplo salga como se espera y el
   resto de los agentes funcionen bien en la marcha blanca — no antes.
